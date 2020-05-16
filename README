@@ -1,0 +1,19 @@
+Nicolau Mihnea-Andrei, 336CA - Tema 3 SO
+
+================================================================================
+Organizare:
+
+Am folosit structurile deja existente, nu am folosit campul data.
+Am folosit ca punct de plecare exercitiul 5 din laboratorul 6.
+
+================================================================================
+Implementare:
+
+init_loader => setez handler-ul pt SIGSEV;
+so_execute => deschid fisierul, setez variabilele globale, pun 0-uri si apoi
+				pornesc executia
+Cand primesc un semnal SIGSEGV, verific daca este unul din cele 2 cazuri: 
+acces fara permisiuni si adresa in afara segmentelor cunoscute; pt acestea
+apelez old_action.
+Cazul in care am un fault de pagina nemapata, o mapez pe o pagina noua.
+Daca segmentul are file_size = 0, mapez pagina ca ANONYMOUS (doar cu 0-uri).
